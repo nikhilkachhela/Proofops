@@ -1,0 +1,4 @@
+{"time": "2026-10-20T10:13:52Z", "pod": "cartservice-7d9f8c6b5-x2k4p", "line": "ERR Can't connect to redis-cart:6379: max number of clients reached"}
+{"time": "2026-10-20T10:14:05Z", "pod": "cartservice-7d9f8c6b5-x2k4p", "line": "Error getting cart: RedisConnectionException: No connection is available to service this operation"}
+{"time": "2026-10-20T10:15:20Z", "pod": "frontend-6b8d9f7c4d-k2x9p", "line": "request error: rpc error: code = Unavailable desc = failed to retrieve cart"}
+{"time": "2026-10-20T10:21:00Z", "pod": "productcatalogservice-6c7b8d9f5c-p4r6s", "line": "INFO served 120 requests in the last minute"}

@@ -1,0 +1,3 @@
+{"time": "2026-10-21T09:31:10Z", "pod": "cartservice-7d9f8c6b5-x2k4p", "line": "fatal error: runtime: out of memory"}
+{"time": "2026-10-21T09:33:05Z", "pod": "frontend-6b8d9f7c4d-k2x9p", "line": "request error: rpc error: code = Unavailable desc = failed to retrieve cart"}
+{"time": "2026-10-21T09:33:30Z", "pod": "redis-cart-5f7d8c9b6-q8w2r", "line": "Ready to accept connections"}

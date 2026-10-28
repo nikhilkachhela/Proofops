@@ -1,0 +1,4 @@
+[
+  {"time": "2026-10-20T10:14:40Z", "target": "service:cartservice", "metric": "error_rate", "value": 0.42, "baseline": 0.01},
+  {"time": "2026-10-20T10:20:30Z", "target": "node:node-2", "metric": "cpu_utilization", "value": 0.93, "baseline": 0.40}
+]

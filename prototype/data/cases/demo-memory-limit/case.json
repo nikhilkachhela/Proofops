@@ -1,0 +1,7 @@
+{
+  "case_id": "demo-memory-limit",
+  "system": "Online Boutique (demo case, hand-written for testing)",
+  "symptom": "Cart requests intermittently fail and the storefront is slow",
+  "symptom_service": "frontend",
+  "synthetic": true
+}

@@ -1,0 +1,298 @@
+[
+  {
+    "case_key": "boutique/admission/24",
+    "collection_timestamp": "2025-12-01T10:48:21.717363",
+    "k8s_commands": 416,
+    "tool_calls": 489,
+    "has_dependencies_tool": true,
+    "log_services": 11,
+    "log_lines": 2088,
+    "log_lines_with_timestamp_pct": 85.5,
+    "error_like_log_lines": 37,
+    "services_with_error_logs": [
+      "frontend",
+      "redis-cart"
+    ],
+    "k8s_events": 115,
+    "k8s_warning_events": 25,
+    "warning_reasons": [
+      "FailedCreate",
+      "InvalidDiskCapacity",
+      "Rebooted",
+      "Unhealthy"
+    ],
+    "pods_not_running": [],
+    "pods_not_ready": [],
+    "pods_with_restarts": [],
+    "services_with_empty_endpoints": [
+      "checkoutservice"
+    ],
+    "alert_count": 0,
+    "has_metrics_csv": false
+  },
+  {
+    "case_key": "boutique/admission/4",
+    "collection_timestamp": "2025-11-28T15:42:47.871019",
+    "k8s_commands": 412,
+    "tool_calls": 485,
+    "has_dependencies_tool": true,
+    "log_services": 11,
+    "log_lines": 1240,
+    "log_lines_with_timestamp_pct": 90.6,
+    "error_like_log_lines": 221,
+    "services_with_error_logs": [
+      "frontend",
+      "redis-cart"
+    ],
+    "k8s_events": 69,
+    "k8s_warning_events": 8,
+    "warning_reasons": [
+      "FailedCreate",
+      "Unhealthy"
+    ],
+    "pods_not_running": [],
+    "pods_not_ready": [],
+    "pods_with_restarts": [],
+    "services_with_empty_endpoints": [
+      "currencyservice"
+    ],
+    "alert_count": 0,
+    "has_metrics_csv": false
+  },
+  {
+    "case_key": "boutique/performance/11",
+    "collection_timestamp": "2025-12-25T16:59:37.674287",
+    "k8s_commands": 416,
+    "tool_calls": 489,
+    "has_dependencies_tool": true,
+    "log_services": 11,
+    "log_lines": 88435,
+    "log_lines_with_timestamp_pct": 100.0,
+    "error_like_log_lines": 121,
+    "services_with_error_logs": [
+      "frontend",
+      "paymentservice",
+      "redis-cart"
+    ],
+    "k8s_events": 138,
+    "k8s_warning_events": 6,
+    "warning_reasons": [
+      "FailedCreate"
+    ],
+    "pods_not_running": [],
+    "pods_not_ready": [],
+    "pods_with_restarts": [],
+    "services_with_empty_endpoints": [],
+    "alert_count": 3,
+    "has_metrics_csv": true
+  },
+  {
+    "case_key": "boutique/performance/20",
+    "collection_timestamp": "2025-12-26T00:37:33.782085",
+    "k8s_commands": 416,
+    "tool_calls": 489,
+    "has_dependencies_tool": true,
+    "log_services": 11,
+    "log_lines": 71986,
+    "log_lines_with_timestamp_pct": 100.0,
+    "error_like_log_lines": 374,
+    "services_with_error_logs": [
+      "frontend",
+      "paymentservice",
+      "redis-cart"
+    ],
+    "k8s_events": 139,
+    "k8s_warning_events": 7,
+    "warning_reasons": [
+      "FailedCreate"
+    ],
+    "pods_not_running": [],
+    "pods_not_ready": [],
+    "pods_with_restarts": [],
+    "services_with_empty_endpoints": [],
+    "alert_count": 4,
+    "has_metrics_csv": true
+  },
+  {
+    "case_key": "boutique/runtime/23",
+    "collection_timestamp": "2025-11-10T22:14:54.503025",
+    "k8s_commands": 417,
+    "tool_calls": 490,
+    "has_dependencies_tool": true,
+    "log_services": 11,
+    "log_lines": 117,
+    "log_lines_with_timestamp_pct": 35.9,
+    "error_like_log_lines": 6,
+    "services_with_error_logs": [
+      "cartservice",
+      "frontend",
+      "redis-cart"
+    ],
+    "k8s_events": 71,
+    "k8s_warning_events": 8,
+    "warning_reasons": [
+      "FailedCreate",
+      "FailedCreatePodSandBox",
+      "Unhealthy"
+    ],
+    "pods_not_running": [
+      "cartservice-8c5b58976-49rrx"
+    ],
+    "pods_not_ready": [
+      "cartservice-8c5b58976-49rrx"
+    ],
+    "pods_with_restarts": [],
+    "services_with_empty_endpoints": [
+      "cartservice"
+    ],
+    "alert_count": 0,
+    "has_metrics_csv": false
+  },
+  {
+    "case_key": "boutique/runtime/9",
+    "collection_timestamp": "2025-11-21T20:15:39.403096",
+    "k8s_commands": 413,
+    "tool_calls": 486,
+    "has_dependencies_tool": true,
+    "log_services": 11,
+    "log_lines": 2491,
+    "log_lines_with_timestamp_pct": 85.9,
+    "error_like_log_lines": 119,
+    "services_with_error_logs": [
+      "frontend",
+      "redis-cart"
+    ],
+    "k8s_events": 74,
+    "k8s_warning_events": 7,
+    "warning_reasons": [
+      "FailedCreate",
+      "Unhealthy"
+    ],
+    "pods_not_running": [],
+    "pods_not_ready": [],
+    "pods_with_restarts": [
+      "adservice-645c94d6-9jrbk"
+    ],
+    "services_with_empty_endpoints": [],
+    "alert_count": 0,
+    "has_metrics_csv": false
+  },
+  {
+    "case_key": "boutique/service/12",
+    "collection_timestamp": "2025-11-11T16:11:26.970565",
+    "k8s_commands": 417,
+    "tool_calls": 490,
+    "has_dependencies_tool": true,
+    "log_services": 11,
+    "log_lines": 1438,
+    "log_lines_with_timestamp_pct": 82.3,
+    "error_like_log_lines": 177,
+    "services_with_error_logs": [
+      "frontend",
+      "redis-cart"
+    ],
+    "k8s_events": 72,
+    "k8s_warning_events": 6,
+    "warning_reasons": [
+      "FailedCreate",
+      "Unhealthy"
+    ],
+    "pods_not_running": [],
+    "pods_not_ready": [],
+    "pods_with_restarts": [],
+    "services_with_empty_endpoints": [],
+    "alert_count": 0,
+    "has_metrics_csv": false
+  },
+  {
+    "case_key": "boutique/service/39",
+    "collection_timestamp": "2025-11-11T15:36:59.886055",
+    "k8s_commands": 421,
+    "tool_calls": 494,
+    "has_dependencies_tool": true,
+    "log_services": 11,
+    "log_lines": 2264,
+    "log_lines_with_timestamp_pct": 85.1,
+    "error_like_log_lines": 169,
+    "services_with_error_logs": [
+      "frontend",
+      "redis-cart"
+    ],
+    "k8s_events": 74,
+    "k8s_warning_events": 8,
+    "warning_reasons": [
+      "FailedCreate",
+      "Unhealthy"
+    ],
+    "pods_not_running": [],
+    "pods_not_ready": [],
+    "pods_with_restarts": [],
+    "services_with_empty_endpoints": [
+      "adservice"
+    ],
+    "alert_count": 0,
+    "has_metrics_csv": false
+  },
+  {
+    "case_key": "boutique/service/54",
+    "collection_timestamp": "2025-11-11T22:33:02.361386",
+    "k8s_commands": 421,
+    "tool_calls": 494,
+    "has_dependencies_tool": true,
+    "log_services": 11,
+    "log_lines": 2128,
+    "log_lines_with_timestamp_pct": 83.5,
+    "error_like_log_lines": 209,
+    "services_with_error_logs": [
+      "frontend",
+      "redis-cart"
+    ],
+    "k8s_events": 70,
+    "k8s_warning_events": 4,
+    "warning_reasons": [
+      "FailedCreate"
+    ],
+    "pods_not_running": [],
+    "pods_not_ready": [],
+    "pods_with_restarts": [],
+    "services_with_empty_endpoints": [
+      "shippingservice"
+    ],
+    "alert_count": 0,
+    "has_metrics_csv": false
+  },
+  {
+    "case_key": "boutique/startup/45",
+    "collection_timestamp": "2025-11-11T01:16:31.618990",
+    "k8s_commands": 417,
+    "tool_calls": 490,
+    "has_dependencies_tool": true,
+    "log_services": 11,
+    "log_lines": 119,
+    "log_lines_with_timestamp_pct": 31.9,
+    "error_like_log_lines": 6,
+    "services_with_error_logs": [
+      "emailservice",
+      "frontend",
+      "redis-cart"
+    ],
+    "k8s_events": 77,
+    "k8s_warning_events": 11,
+    "warning_reasons": [
+      "Failed",
+      "FailedCreate",
+      "FailedScheduling",
+      "Unhealthy"
+    ],
+    "pods_not_running": [
+      "emailservice-6b89575c-jttr4"
+    ],
+    "pods_not_ready": [
+      "emailservice-6b89575c-jttr4"
+    ],
+    "pods_with_restarts": [],
+    "services_with_empty_endpoints": [],
+    "alert_count": 0,
+    "has_metrics_csv": false
+  }
+]

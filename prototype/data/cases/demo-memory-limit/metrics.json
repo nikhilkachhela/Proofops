@@ -1,0 +1,4 @@
+[
+  {"time": "2026-10-21T09:31:00Z", "target": "service:cartservice", "metric": "memory_utilization", "value": 0.99, "baseline": 0.35},
+  {"time": "2026-10-21T09:33:10Z", "target": "service:redis-cart", "metric": "latency_ms", "value": 45, "baseline": 3}
+]

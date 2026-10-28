@@ -1,0 +1,2 @@
+// 10_nodes_by_label  (database: proofops)
+MATCH (n) RETURN labels(n)[0] AS label, count(*) AS nodes ORDER BY nodes DESC;

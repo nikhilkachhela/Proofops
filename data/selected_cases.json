@@ -1,0 +1,29 @@
+{
+  "seed": 42,
+  "system": "boutique",
+  "case_keys": [
+    "boutique/runtime/23",
+    "boutique/runtime/9",
+    "boutique/service/54",
+    "boutique/service/39",
+    "boutique/service/12",
+    "boutique/admission/4",
+    "boutique/admission/24",
+    "boutique/startup/45",
+    "boutique/performance/11",
+    "boutique/performance/20"
+  ],
+  "allow_patterns": [
+    "benchmark/boutique/runtime/23/*",
+    "benchmark/boutique/runtime/9/*",
+    "benchmark/boutique/service/54/*",
+    "benchmark/boutique/service/39/*",
+    "benchmark/boutique/service/12/*",
+    "benchmark/boutique/admission/4/*",
+    "benchmark/boutique/admission/24/*",
+    "benchmark/boutique/startup/45/*",
+    "benchmark/boutique/performance/11/*",
+    "benchmark/boutique/performance/20/*"
+  ],
+  "download_mb": 54.2
+}

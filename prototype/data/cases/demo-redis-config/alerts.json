@@ -1,0 +1,4 @@
+[
+  {"time": "2026-10-20T10:15:00Z", "service": "frontend", "alert": "HighLatency", "severity": "critical"},
+  {"time": "2026-10-20T10:15:30Z", "service": "cartservice", "alert": "HighErrorRate", "severity": "warning"}
+]

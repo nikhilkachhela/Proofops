@@ -1,0 +1,7 @@
+huggingface_hub==2.2.0
+neo4j==6.4.0
+owlrl==7.6.2
+pandas==3.0.6
+pyshacl==0.40.1
+python-dotenv==1.2.4
+rdflib==7.6.0

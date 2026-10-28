@@ -1,0 +1,4 @@
+[
+  {"time": "2026-10-21T09:33:00Z", "service": "frontend", "alert": "HighLatency", "severity": "critical"},
+  {"time": "2026-10-21T09:33:20Z", "service": "cartservice", "alert": "PodRestarting", "severity": "warning"}
+]

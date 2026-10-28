@@ -1,0 +1,7 @@
+{
+  "case_id": "demo-redis-config",
+  "system": "Online Boutique (demo case, hand-written for testing)",
+  "symptom": "Users report checkout and cart pages timing out",
+  "symptom_service": "frontend",
+  "synthetic": true
+}

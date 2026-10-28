@@ -1,0 +1,107 @@
+{
+  "namespace": "boutique",
+  "nodes": [
+    {
+      "name": "node-1"
+    },
+    {
+      "name": "node-2"
+    }
+  ],
+  "deployments": [
+    {
+      "name": "frontend",
+      "replicas": 1,
+      "service_account": "default",
+      "config_maps": []
+    },
+    {
+      "name": "cartservice",
+      "replicas": 1,
+      "service_account": "default",
+      "config_maps": []
+    },
+    {
+      "name": "redis-cart",
+      "replicas": 1,
+      "service_account": "default",
+      "config_maps": [
+        "redis-config"
+      ]
+    },
+    {
+      "name": "checkoutservice",
+      "replicas": 1,
+      "service_account": "default",
+      "config_maps": []
+    },
+    {
+      "name": "productcatalogservice",
+      "replicas": 1,
+      "service_account": "default",
+      "config_maps": []
+    }
+  ],
+  "pods": [
+    {
+      "name": "frontend-6b8d9f7c4d-k2x9p",
+      "node": "node-1",
+      "phase": "Running",
+      "restarts": 0
+    },
+    {
+      "name": "cartservice-7d9f8c6b5-x2k4p",
+      "node": "node-1",
+      "phase": "CrashLoopBackOff",
+      "restarts": 6
+    },
+    {
+      "name": "redis-cart-5f7d8c9b6-q8w2r",
+      "node": "node-1",
+      "phase": "Running",
+      "restarts": 0
+    },
+    {
+      "name": "checkoutservice-84c9d7f6b8-m3n7t",
+      "node": "node-2",
+      "phase": "Running",
+      "restarts": 0
+    },
+    {
+      "name": "productcatalogservice-6c7b8d9f5c-p4r6s",
+      "node": "node-2",
+      "phase": "Running",
+      "restarts": 0
+    }
+  ],
+  "services": [
+    {
+      "name": "frontend",
+      "selector": "frontend"
+    },
+    {
+      "name": "cartservice",
+      "selector": "cartservice"
+    },
+    {
+      "name": "redis-cart",
+      "selector": "redis-cart"
+    },
+    {
+      "name": "checkoutservice",
+      "selector": "checkoutservice"
+    },
+    {
+      "name": "productcatalogservice",
+      "selector": "productcatalogservice"
+    }
+  ],
+  "config_maps": [
+    {
+      "name": "redis-config",
+      "data": {
+        "maxclients": "10000"
+      }
+    }
+  ]
+}

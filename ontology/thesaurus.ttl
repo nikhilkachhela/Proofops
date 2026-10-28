@@ -1,0 +1,26 @@
+# ProofOps controlled vocabulary + thesaurus (SKOS). Runtime mirror: proofops/thesaurus.py
+@prefix po:   <https://example.org/proofops#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+po:SignalTypes a skos:ConceptScheme ; skos:prefLabel "ProofOps signal types"@en .
+
+po:ConnectionPoolExhausted a skos:Concept ; skos:inScheme po:SignalTypes ;
+    skos:prefLabel "Connection pool exhausted"@en ;
+    skos:altLabel "max number of clients reached"@en , "too many connections"@en ;
+    skos:broader po:ConnectionProblem ;
+    skos:definition "A server refuses new connections because its connection limit is reached."@en .
+po:ConnectionFailure a skos:Concept ; skos:inScheme po:SignalTypes ;
+    skos:prefLabel "Connection failure"@en ;
+    skos:altLabel "connection refused"@en , "ECONNREFUSED"@en , "no connection is available"@en ;
+    skos:broader po:ConnectionProblem .
+po:ConnectionProblem a skos:Concept ; skos:inScheme po:SignalTypes ; skos:prefLabel "Connection problem"@en .
+po:OutOfMemory a skos:Concept ; skos:inScheme po:SignalTypes ;
+    skos:prefLabel "Out of memory"@en ; skos:altLabel "OOMKilled"@en , "cannot allocate memory"@en ;
+    skos:related po:MemorySaturation .
+po:MemorySaturation a skos:Concept ; skos:inScheme po:SignalTypes ; skos:prefLabel "Memory saturation"@en .
+po:CPUSaturation a skos:Concept ; skos:inScheme po:SignalTypes ; skos:prefLabel "CPU saturation"@en ; skos:altLabel "HighCPU"@en .
+po:UpstreamUnavailable a skos:Concept ; skos:inScheme po:SignalTypes ;
+    skos:prefLabel "Upstream unavailable"@en ; skos:altLabel "code = Unavailable"@en , "503 Service Unavailable"@en .
+po:Timeout a skos:Concept ; skos:inScheme po:SignalTypes ; skos:prefLabel "Timeout"@en ; skos:altLabel "deadline exceeded"@en .
+po:CrashLoop a skos:Concept ; skos:inScheme po:SignalTypes ; skos:prefLabel "Crash loop"@en ; skos:altLabel "BackOff"@en , "CrashLoopBackOff"@en .
+po:ConfigError a skos:Concept ; skos:inScheme po:SignalTypes ; skos:prefLabel "Configuration error"@en .

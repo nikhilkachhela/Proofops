@@ -1,0 +1,5 @@
+[
+  {"time": "2026-10-20T10:02:00Z", "kind": "ConfigMap", "object": "redis-config", "reason": "Updated", "message": "ConfigMap redis-config updated: maxclients 10000 -> 4"},
+  {"time": "2026-10-20T10:03:10Z", "kind": "Pod", "object": "redis-cart-5f7d8c9b6-q8w2r", "reason": "Restarted", "message": "Container redis restarted to apply new configuration"},
+  {"time": "2026-10-20T10:20:30Z", "kind": "Node", "object": "node-2", "reason": "HighCPU", "message": "Node node-2 CPU utilization above 90%"}
+]

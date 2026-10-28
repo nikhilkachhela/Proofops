@@ -1,0 +1,16 @@
+.venv/
+.env
+__pycache__/
+*.pyc
+.DS_Store
+# Downloaded benchmark data and cloned repo (large; re-fetch with scripts)
+data/raw/
+vendor/
+# Old copies and scratch (kept locally, not versioned)
+project/
+project.zip
+files/
+files.zip
+cloudopsbench-data/
+~$*
+*.pyc

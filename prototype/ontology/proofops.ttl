@@ -1,0 +1,84 @@
+# ProofOps ontology (v0.1). Open in Protege 5.6.x; run HermiT to see inferred classes.
+# Meaning lives here; observed facts live in Neo4j (labels reuse these class names).
+@prefix po:   <https://example.org/proofops#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/proofops> a owl:Ontology ;
+    rdfs:label "ProofOps ontology"@en ; owl:versionInfo "0.1" .
+
+skos:definition a owl:AnnotationProperty .
+prov:wasDerivedFrom a owl:ObjectProperty .
+
+### Kubernetes resources (reused names from the Kubernetes API)
+po:K8sObject a owl:Class ; rdfs:label "Kubernetes object"@en .
+po:Pod a owl:Class ; rdfs:subClassOf po:K8sObject .
+po:ReplicaSet a owl:Class ; rdfs:subClassOf po:K8sObject .
+po:Deployment a owl:Class ; rdfs:subClassOf po:K8sObject .
+po:Node a owl:Class ; rdfs:subClassOf po:K8sObject .
+po:ConfigMap a owl:Class ; rdfs:subClassOf po:K8sObject .
+po:Service a owl:Class ; rdfs:subClassOf po:K8sObject ;
+    rdfs:label "Service (Kubernetes object)"@en ;
+    skos:definition "A Kubernetes Service object. Not to be confused with a microservice (homonym, qualified per ANSI/NISO Z39.19)."@en .
+
+po:dependsOn a owl:ObjectProperty , owl:TransitiveProperty ;
+    rdfs:comment "Structural dependency (calls, selects, mounts, owns, runs on). Transitive: this is what yields multi-hop paths."@en .
+po:calls a owl:ObjectProperty ; rdfs:subPropertyOf po:dependsOn ; rdfs:domain po:Service ; rdfs:range po:Service .
+po:mounts a owl:ObjectProperty ; rdfs:subPropertyOf po:dependsOn ; rdfs:domain po:Pod ; rdfs:range po:ConfigMap .
+
+### Signals (observed evidence carriers)
+po:Signal a owl:Class .
+po:LogSignal a owl:Class ; rdfs:subClassOf po:Signal .
+po:MetricAnomaly a owl:Class ; rdfs:subClassOf po:Signal .
+po:RuntimeEvent a owl:Class ; rdfs:subClassOf po:Signal ; rdfs:comment "Pod/node events such as OOMKilled or BackOff. Effects, not root causes (unless on a Node)."@en .
+po:ChangeEvent a owl:Class ; rdfs:comment "A configuration or spec change. Root-cause candidate."@en .
+po:Alert a owl:Class .
+
+### Fault-type taxonomy (evidence requirements are inherited downwards)
+po:Fault a owl:Class ; skos:definition "A condition that causes user-visible symptoms."@en .
+po:ChangeInducedFault a owl:Class ; rdfs:subClassOf po:Fault ;
+    skos:definition "A fault introduced by a change to configuration or a resource specification."@en .
+po:ConfigurationFault a owl:Class ; rdfs:subClassOf po:ChangeInducedFault .
+po:ResourceLimitFault a owl:Class ; rdfs:subClassOf po:ChangeInducedFault .
+po:ResourceFault a owl:Class ; rdfs:subClassOf po:Fault .
+po:ResourceExhaustion a owl:Class ; rdfs:subClassOf po:ResourceFault .
+po:DependencyFault a owl:Class ; rdfs:subClassOf po:Fault .
+
+### Evidence types (the three contract requirements)
+po:Evidence a owl:Class ; rdfs:subClassOf prov:Entity .
+po:TemporalPrecedence a owl:Class ; rdfs:subClassOf po:Evidence ; skos:definition "The suspected cause occurred before the first symptom."@en .
+po:DependencyPath a owl:Class ; rdfs:subClassOf po:Evidence ; skos:definition "A structural path links the cause to the symptomatic service."@en .
+po:CorroboratingSignal a owl:Class ; rdfs:subClassOf po:Evidence ; skos:definition "A signal of a different kind, on the path and after the cause, agrees."@en .
+
+### Diagnoses and statuses
+po:Diagnosis a owl:Class .
+po:hasEvidence a owl:ObjectProperty ; rdfs:domain po:Diagnosis ; rdfs:range po:Evidence .
+po:diagnosedFault a owl:ObjectProperty ; rdfs:domain po:Diagnosis ; rdfs:range po:Fault .
+po:aboutCause a owl:DatatypeProperty ; rdfs:domain po:Diagnosis .
+po:signalType a owl:ObjectProperty .
+po:detail a owl:DatatypeProperty .
+
+# Defined classes: the reasoner classifies a diagnosis by its fault type, so it inherits that type's contract.
+po:ChangeInducedFaultDiagnosis a owl:Class ; owl:equivalentClass [ a owl:Class ;
+    owl:intersectionOf ( po:Diagnosis [ a owl:Restriction ; owl:onProperty po:diagnosedFault ; owl:someValuesFrom po:ChangeInducedFault ] ) ] .
+po:ConfigurationFaultDiagnosis a owl:Class ; rdfs:subClassOf po:ChangeInducedFaultDiagnosis ; owl:equivalentClass [ a owl:Class ;
+    owl:intersectionOf ( po:Diagnosis [ a owl:Restriction ; owl:onProperty po:diagnosedFault ; owl:someValuesFrom po:ConfigurationFault ] ) ] .
+po:ResourceLimitFaultDiagnosis a owl:Class ; rdfs:subClassOf po:ChangeInducedFaultDiagnosis ; owl:equivalentClass [ a owl:Class ;
+    owl:intersectionOf ( po:Diagnosis [ a owl:Restriction ; owl:onProperty po:diagnosedFault ; owl:someValuesFrom po:ResourceLimitFault ] ) ] .
+po:ResourceExhaustionDiagnosis a owl:Class ; rdfs:subClassOf po:Diagnosis .
+po:DependencyFaultDiagnosis a owl:Class ; rdfs:subClassOf po:Diagnosis .
+
+po:DiagnosticStatus a owl:Class .
+po:Supported a owl:NamedIndividual , po:DiagnosticStatus .
+po:Plausible a owl:NamedIndividual , po:DiagnosticStatus .
+po:Refuted a owl:NamedIndividual , po:DiagnosticStatus .
+po:Abstained a owl:NamedIndividual , po:DiagnosticStatus .
+
+### Demo individuals (Protege: start HermiT, then look at dx_demo's inferred types)
+po:redis_config_change a owl:NamedIndividual , po:ConfigurationFault .
+po:dx_demo a owl:NamedIndividual , po:Diagnosis ; po:diagnosedFault po:redis_config_change .
+# EXPECTED: dx_demo is inferred to be a ConfigurationFaultDiagnosis and a ChangeInducedFaultDiagnosis.

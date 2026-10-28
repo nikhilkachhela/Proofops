@@ -1,0 +1,5 @@
+[
+  {"time": "2026-10-21T09:30:00Z", "kind": "Deployment", "object": "cartservice", "reason": "Updated", "message": "Deployment cartservice updated: memory limit 512Mi -> 64Mi"},
+  {"time": "2026-10-21T09:31:15Z", "kind": "Pod", "object": "cartservice-7d9f8c6b5-x2k4p", "reason": "OOMKilled", "message": "Container cartservice terminated: OOMKilled"},
+  {"time": "2026-10-21T09:32:40Z", "kind": "Pod", "object": "cartservice-7d9f8c6b5-x2k4p", "reason": "BackOff", "message": "Back-off restarting failed container"}
+]

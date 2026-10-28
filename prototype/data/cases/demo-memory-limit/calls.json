@@ -1,0 +1,7 @@
+[
+  {"from": "frontend", "to": "cartservice"},
+  {"from": "frontend", "to": "productcatalogservice"},
+  {"from": "frontend", "to": "checkoutservice"},
+  {"from": "checkoutservice", "to": "cartservice"},
+  {"from": "cartservice", "to": "redis-cart"}
+]
