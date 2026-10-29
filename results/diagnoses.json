@@ -972,7 +972,7 @@
       },
       {
         "type": "CorroboratingSignal",
-        "detail": "1 error lines: Error: Error from server (BadRequest): container \"server\" in pod \"shippingservice-674c8c54"
+        "detail": "1 error lines: Error: Error from server (BadRequest): container \"server\" in pod \"currencyservice-5cd6467f"
       }
     ]
   },

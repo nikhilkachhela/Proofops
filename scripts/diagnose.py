@@ -368,7 +368,10 @@ def main():
         print(f"{cid}: {len(res):2d} candidates | top: {top and top['obj']:<28s} {top and top['cls']:<20s} "
               f"{top and top['status']:<10s} missing={top and top['missing']}" if top else f"{cid}: no candidates")
     (ROOT / "results").mkdir(exist_ok=True)
-    (ROOT / "results/diagnoses.json").write_text(json.dumps(out, indent=2, default=str))
+    path = ROOT / "results/diagnoses.json"
+    merged = json.loads(path.read_text()) if path.exists() and sys.argv[1:] else {}
+    merged.update(out)        # running a few cases updates them without dropping the others
+    path.write_text(json.dumps(merged, indent=2, default=str))
     drv.close()
     print("wrote results/diagnoses.json and Diagnosis/Evidence nodes in Neo4j")
 
