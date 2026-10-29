@@ -1,0 +1,2111 @@
+{
+  "C01": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-10T14:13:30+00:00",
+    "n_candidates": 3,
+    "proofops": {
+      "cls": "RuntimeFault",
+      "obj": "app/cartservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "WarningEvent",
+      "why": "container init OOM-killed (memory limit)"
+    },
+    "proofops_top3": [
+      "app/cartservice",
+      "app/cartservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-10T14:13:32+00:00 <= first symptom 2025-11-10T14:13:30+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> cartservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "1 error lines: Error: Error from server (BadRequest): container \"server\" in pod \"cartservice-8c5b58976-49"
+      }
+    ]
+  },
+  "C02": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-21T12:13:39+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "RuntimeFault",
+      "obj": "app/adservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "WarningEvent",
+      "why": "container unhealthy or restarting (Unhealthy)"
+    },
+    "proofops_top3": [
+      "app/adservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-21T12:13:50+00:00 <= first symptom 2025-11-21T12:13:39+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> adservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "pod adservice-645c94d6-9jrbk Running restarts 2 (29s ago)"
+      }
+    ]
+  },
+  "C03": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-11T14:31:07+00:00",
+    "n_candidates": 3,
+    "proofops": {
+      "cls": "ServiceRoutingFault",
+      "obj": "app/shippingservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "State",
+      "why": "service has no endpoints (selector app=shippingservice,env=production)"
+    },
+    "proofops_top3": [
+      "app/shippingservice",
+      "app/productcatalogservice",
+      "node/master"
+    ],
+    "graph_first": "app/shippingservice",
+    "graph_first_status": "SUPPORTED",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-11T14:31:05+00:00 <= first symptom 2025-11-11T14:31:07+00:00 (+/-0 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> shippingservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "106 error lines: failed to get shipping quote: rpc error: code = Unavailable desc = connection error: desc "
+      }
+    ]
+  },
+  "C04": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-11T07:32:44+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "ServiceRoutingFault",
+      "obj": "app/adservice",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "TemporalPrecedence"
+      ],
+      "kind": "State",
+      "why": "service has no endpoints (selector application=adservice)"
+    },
+    "proofops_top3": [
+      "app/adservice",
+      "node/master"
+    ],
+    "graph_first": "app/adservice",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> adservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "Unhealthy x1"
+      }
+    ]
+  },
+  "C05": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-11T08:09:34+00:00",
+    "n_candidates": 3,
+    "proofops": {
+      "cls": "ServiceRoutingFault",
+      "obj": "app/paymentservice",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "TemporalPrecedence",
+        "CorroboratingSignal"
+      ],
+      "kind": "LogError",
+      "why": "calls to paymentservice fail although it has endpoints"
+    },
+    "proofops_top3": [
+      "app/paymentservice",
+      "app/shippingservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> checkoutservice -> paymentservice"
+      }
+    ]
+  },
+  "C06": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-28T07:40:49+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "AdmissionFault",
+      "obj": "app/currencyservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "State",
+      "why": "deployment uses service account 'currencyservices', which does not exist"
+    },
+    "proofops_top3": [
+      "app/currencyservice",
+      "node/master"
+    ],
+    "graph_first": "app/currencyservice",
+    "graph_first_status": "SUPPORTED",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-28T07:40:38+00:00 <= first symptom 2025-11-28T07:40:49+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> currencyservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "202 error lines: could not retrieve currencies: rpc error: code = Unavailable desc = connection error: desc"
+      }
+    ]
+  },
+  "C07": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-12-01T02:46:21+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "AdmissionFault",
+      "obj": "namespace/boutique",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "WarningEvent",
+      "why": "pod creation forbidden: namespace quota exceeded"
+    },
+    "proofops_top3": [
+      "namespace/boutique",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-12-01T02:46:11+00:00 <= first symptom 2025-12-01T02:46:21+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> checkoutservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "8 error lines: failed to complete the order: rpc error: code = Unavailable desc = connection error: desc "
+      }
+    ]
+  },
+  "C08": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-10T17:15:06+00:00",
+    "n_candidates": 3,
+    "proofops": {
+      "cls": "SchedulingFault",
+      "obj": "app/redis-cart",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "WarningEvent",
+      "why": "no node can run the pod"
+    },
+    "proofops_top3": [
+      "app/redis-cart",
+      "app/emailservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-10T17:15:05+00:00 <= first symptom 2025-11-10T17:15:06+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> cartservice -> redis-cart"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "1 error lines: 1:M 10 Nov 2025 17:15:13.712 * <bf> \t{ bf-error-rate       :      0.01 }"
+      }
+    ]
+  },
+  "C09": {
+    "symptom_services": [
+      "checkoutservice",
+      "frontend",
+      "shippingservice",
+      "worker-02"
+    ],
+    "onset": "2025-12-25T08:54:56+00:00",
+    "n_candidates": 11,
+    "proofops": {
+      "cls": "ServiceRoutingFault",
+      "obj": "app/shippingservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "LogError",
+      "why": "calls to shippingservice fail although it has endpoints"
+    },
+    "proofops_top3": [
+      "app/shippingservice",
+      "node/worker-02",
+      "app/shippingservice"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-12-25T08:53:53+00:00 <= first symptom 2025-12-25T08:54:56+00:00 (+/-0 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "shippingservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "alert shippingservice#1"
+      }
+    ]
+  },
+  "C10": {
+    "symptom_services": [
+      "adservice",
+      "frontend",
+      "productcatalogservice",
+      "recommendationservice"
+    ],
+    "onset": "2025-12-25T16:33:23+00:00",
+    "n_candidates": 8,
+    "proofops": {
+      "cls": "ServiceRoutingFault",
+      "obj": "app/productcatalogservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "LogError",
+      "why": "calls to productcatalogservice fail although it has endpoints"
+    },
+    "proofops_top3": [
+      "app/productcatalogservice",
+      "node/worker-01",
+      "app/productcatalogservice"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-12-25T16:31:46+00:00 <= first symptom 2025-12-25T16:33:23+00:00 (+/-0 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "productcatalogservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "alert productcatalogservice#2"
+      }
+    ]
+  },
+  "C11": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-29T06:57:50+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "AdmissionFault",
+      "obj": "namespace/boutique",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "WarningEvent",
+      "why": "pod creation forbidden: namespace quota exceeded"
+    },
+    "proofops_top3": [
+      "namespace/boutique",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-29T06:57:38+00:00 <= first symptom 2025-11-29T06:57:50+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> shippingservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "50 error lines: failed to get shipping quote: rpc error: code = Unavailable desc = connection error: desc "
+      }
+    ]
+  },
+  "C12": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-28T07:57:35+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "AdmissionFault",
+      "obj": "app/recommendationservice",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "CorroboratingSignal"
+      ],
+      "kind": "State",
+      "why": "deployment uses service account 'recommendservices', which does not exist"
+    },
+    "proofops_top3": [
+      "app/recommendationservice",
+      "node/master"
+    ],
+    "graph_first": "app/recommendationservice",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-28T07:57:23+00:00 <= first symptom 2025-11-28T07:57:35+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> recommendationservice"
+      }
+    ]
+  },
+  "C13": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-28T07:34:26+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "AdmissionFault",
+      "obj": "app/cartservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "State",
+      "why": "deployment uses service account 'cartservices', which does not exist"
+    },
+    "proofops_top3": [
+      "app/cartservice",
+      "node/master"
+    ],
+    "graph_first": "app/cartservice",
+    "graph_first_status": "SUPPORTED",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-28T07:34:16+00:00 <= first symptom 2025-11-28T07:34:26+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> cartservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "163 error lines: could not retrieve cart: rpc error: code = Unavailable desc = connection error: desc = \"tr"
+      }
+    ]
+  },
+  "C14": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-29T08:02:34+00:00",
+    "n_candidates": 1,
+    "proofops": {
+      "cls": "InfrastructureFault",
+      "obj": "node/master",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "TemporalPrecedence",
+        "DependencyPath",
+        "CorroboratingSignal"
+      ],
+      "kind": "State",
+      "why": "node status Ready,SchedulingDisabled"
+    },
+    "proofops_top3": [
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": []
+  },
+  "C15": {
+    "symptom_services": [
+      "currencyservice",
+      "frontend",
+      "productcatalogservice"
+    ],
+    "onset": "2026-05-19T05:58:04+00:00",
+    "n_candidates": 10,
+    "proofops": {
+      "cls": "PerformanceFault",
+      "obj": "app/frontend",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "MetricAnomaly",
+      "why": "cpu anomaly on frontend"
+    },
+    "proofops_top3": [
+      "app/frontend",
+      "app/currencyservice",
+      "app/productcatalogservice"
+    ],
+    "graph_first": "app/frontend",
+    "graph_first_status": "SUPPORTED",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2026-05-19T05:58:04+00:00 <= first symptom 2026-05-19T05:58:04+00:00 (+/-5 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "2 error lines: failed to do currency conversion for product 66VCHSJNUP: rpc error: code = Canceled desc ="
+      }
+    ]
+  },
+  "C16": {
+    "symptom_services": [
+      "adservice",
+      "currencyservice",
+      "frontend",
+      "productcatalogservice"
+    ],
+    "onset": "2026-05-19T04:48:33+00:00",
+    "n_candidates": 9,
+    "proofops": {
+      "cls": "PerformanceFault",
+      "obj": "app/frontend",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "MetricAnomaly",
+      "why": "cpu anomaly on frontend"
+    },
+    "proofops_top3": [
+      "app/frontend",
+      "app/redis-cart",
+      "app/currencyservice"
+    ],
+    "graph_first": "app/frontend",
+    "graph_first_status": "SUPPORTED",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2026-05-19T04:48:33+00:00 <= first symptom 2026-05-19T04:48:33+00:00 (+/-5 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "1 error lines: Failed to fetch the name of the cluster in which the pod is runningmetadata: GCE metadata "
+      }
+    ]
+  },
+  "C17": {
+    "symptom_services": [
+      "cartservice",
+      "checkoutservice",
+      "currencyservice",
+      "frontend",
+      "productcatalogservice"
+    ],
+    "onset": "2026-05-19T03:04:50+00:00",
+    "n_candidates": 11,
+    "proofops": {
+      "cls": "PerformanceFault",
+      "obj": "app/checkoutservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "MetricAnomaly",
+      "why": "cpu anomaly on checkoutservice"
+    },
+    "proofops_top3": [
+      "app/checkoutservice",
+      "app/frontend",
+      "app/redis-cart"
+    ],
+    "graph_first": "app/checkoutservice",
+    "graph_first_status": "SUPPORTED",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2026-05-19T03:04:50+00:00 <= first symptom 2026-05-19T03:04:50+00:00 (+/-5 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "checkoutservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "alert checkoutservice#0"
+      }
+    ]
+  },
+  "C18": {
+    "symptom_services": [
+      "checkoutservice",
+      "frontend"
+    ],
+    "onset": "2026-05-19T08:55:07+00:00",
+    "n_candidates": 11,
+    "proofops": {
+      "cls": "PerformanceFault",
+      "obj": "app/checkoutservice",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "TemporalPrecedence"
+      ],
+      "kind": "MetricAnomaly",
+      "why": "cpu anomaly on checkoutservice"
+    },
+    "proofops_top3": [
+      "app/checkoutservice",
+      "app/frontend",
+      "app/redis-cart"
+    ],
+    "graph_first": "app/currencyservice",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "DependencyPath",
+        "detail": "checkoutservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "alert checkoutservice#0"
+      }
+    ]
+  },
+  "C19": {
+    "symptom_services": [
+      "currencyservice",
+      "frontend",
+      "productcatalogservice",
+      "recommendationservice",
+      "shippingservice"
+    ],
+    "onset": "2026-05-18T11:12:05+00:00",
+    "n_candidates": 8,
+    "proofops": {
+      "cls": "PerformanceFault",
+      "obj": "app/shippingservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "MetricAnomaly",
+      "why": "cpu anomaly on shippingservice"
+    },
+    "proofops_top3": [
+      "app/shippingservice",
+      "app/frontend",
+      "app/currencyservice"
+    ],
+    "graph_first": "app/currencyservice",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2026-05-18T11:12:05+00:00 <= first symptom 2026-05-18T11:12:05+00:00 (+/-5 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "shippingservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "alert shippingservice#0"
+      }
+    ]
+  },
+  "C20": {
+    "symptom_services": [
+      "emailservice",
+      "frontend",
+      "paymentservice"
+    ],
+    "onset": "2026-05-18T14:31:59+00:00",
+    "n_candidates": 12,
+    "proofops": {
+      "cls": "PerformanceFault",
+      "obj": "app/frontend",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "MetricAnomaly",
+      "why": "cpu anomaly on frontend"
+    },
+    "proofops_top3": [
+      "app/frontend",
+      "app/paymentservice",
+      "app/emailservice"
+    ],
+    "graph_first": "app/checkoutservice",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2026-05-18T14:30:49+00:00 <= first symptom 2026-05-18T14:31:59+00:00 (+/-5 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "174 error lines: failed to complete the order: rpc error: code = Unavailable desc = no healthy upstream"
+      }
+    ]
+  },
+  "C21": {
+    "symptom_services": [
+      "adservice",
+      "frontend",
+      "productcatalogservice",
+      "shippingservice"
+    ],
+    "onset": "2026-05-19T06:11:34+00:00",
+    "n_candidates": 9,
+    "proofops": {
+      "cls": "PerformanceFault",
+      "obj": "app/shippingservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "MetricAnomaly",
+      "why": "cpu anomaly on shippingservice"
+    },
+    "proofops_top3": [
+      "app/shippingservice",
+      "app/adservice",
+      "app/frontend"
+    ],
+    "graph_first": "app/shippingservice",
+    "graph_first_status": "SUPPORTED",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2026-05-19T06:11:39+00:00 <= first symptom 2026-05-19T06:11:34+00:00 (+/-5 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "shippingservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "alert shippingservice#0"
+      }
+    ]
+  },
+  "C22": {
+    "symptom_services": [
+      "adservice",
+      "cartservice",
+      "currencyservice",
+      "frontend",
+      "recommendationservice"
+    ],
+    "onset": "2026-05-18T09:56:37+00:00",
+    "n_candidates": 12,
+    "proofops": {
+      "cls": "PerformanceFault",
+      "obj": "app/frontend",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "MetricAnomaly",
+      "why": "cpu anomaly on frontend"
+    },
+    "proofops_top3": [
+      "app/frontend",
+      "app/adservice",
+      "app/recommendationservice"
+    ],
+    "graph_first": "app/productcatalogservice",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2026-05-18T09:56:27+00:00 <= first symptom 2026-05-18T09:56:37+00:00 (+/-5 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "526 error lines: could not retrieve products: rpc error: code = Unavailable desc = no healthy upstream"
+      }
+    ]
+  },
+  "C23": {
+    "symptom_services": [
+      "checkoutservice",
+      "emailservice",
+      "frontend",
+      "paymentservice"
+    ],
+    "onset": "2026-05-18T14:37:58+00:00",
+    "n_candidates": 12,
+    "proofops": {
+      "cls": "PerformanceFault",
+      "obj": "app/paymentservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "MetricAnomaly",
+      "why": "cpu anomaly on paymentservice"
+    },
+    "proofops_top3": [
+      "app/paymentservice",
+      "app/frontend",
+      "app/redis-cart"
+    ],
+    "graph_first": "app/frontend",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2026-05-18T14:37:58+00:00 <= first symptom 2026-05-18T14:37:58+00:00 (+/-5 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "paymentservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "1 error lines: 2026-05-18T22:39:08.132564071+08:00 UnacceptedCreditCard [Error]: Sorry, we cannot process"
+      }
+    ]
+  },
+  "C24": {
+    "symptom_services": [
+      "cartservice",
+      "frontend",
+      "recommendationservice"
+    ],
+    "onset": "2026-05-18T10:37:58+00:00",
+    "n_candidates": 9,
+    "proofops": {
+      "cls": "PerformanceFault",
+      "obj": "app/frontend",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "MetricAnomaly",
+      "why": "cpu anomaly on frontend"
+    },
+    "proofops_top3": [
+      "app/frontend",
+      "app/recommendationservice",
+      "app/redis-cart"
+    ],
+    "graph_first": "app/frontend",
+    "graph_first_status": "SUPPORTED",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2026-05-18T10:37:43+00:00 <= first symptom 2026-05-18T10:37:58+00:00 (+/-5 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "553 error lines: could not retrieve product: rpc error: code = Unknown desc = Query product error."
+      }
+    ]
+  },
+  "C25": {
+    "symptom_services": [
+      "currencyservice",
+      "frontend"
+    ],
+    "onset": "2026-05-18T09:15:20+00:00",
+    "n_candidates": 11,
+    "proofops": {
+      "cls": "PerformanceFault",
+      "obj": "app/frontend",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "MetricAnomaly",
+      "why": "cpu anomaly on frontend"
+    },
+    "proofops_top3": [
+      "app/frontend",
+      "app/redis-cart",
+      "app/paymentservice"
+    ],
+    "graph_first": "app/productcatalogservice",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2026-05-18T09:15:20+00:00 <= first symptom 2026-05-18T09:15:20+00:00 (+/-5 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "195 error lines: failed to complete the order: Place order error."
+      }
+    ]
+  },
+  "C26": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": null,
+    "n_candidates": 8,
+    "proofops": {
+      "cls": "InfrastructureFault",
+      "obj": "node/worker-01",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "TemporalPrecedence"
+      ],
+      "kind": "State",
+      "why": "node status NotReady"
+    },
+    "proofops_top3": [
+      "node/worker-01",
+      "app/frontend",
+      "app/paymentservice"
+    ],
+    "graph_first": "node/worker-01",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "DependencyPath",
+        "detail": "frontend"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "1 error lines: Error: Error from server (BadRequest): container \"server\" in pod \"productcatalogservice-6f"
+      }
+    ]
+  },
+  "C27": {
+    "symptom_services": [
+      "cartservice",
+      "frontend"
+    ],
+    "onset": "2026-01-02T05:04:11+00:00",
+    "n_candidates": 11,
+    "proofops": {
+      "cls": "InfrastructureFault",
+      "obj": "node/worker-02",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "State",
+      "why": "node status NotReady"
+    },
+    "proofops_top3": [
+      "node/worker-02",
+      "app/redis-cart",
+      "node/worker-01"
+    ],
+    "graph_first": "node/worker-02",
+    "graph_first_status": "SUPPORTED",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2026-01-02T04:55:21+00:00 <= first symptom 2026-01-02T05:04:11+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "cartservice -> redis-cart"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "1 error lines: Error: Error from server (BadRequest): container \"server\" in pod \"shippingservice-674c8c54"
+      }
+    ]
+  },
+  "C28": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2026-01-02T04:55:18+00:00",
+    "n_candidates": 8,
+    "proofops": {
+      "cls": "InfrastructureFault",
+      "obj": "node/worker-02",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "State",
+      "why": "node status NotReady"
+    },
+    "proofops_top3": [
+      "node/worker-02",
+      "app/checkoutservice",
+      "app/currencyservice"
+    ],
+    "graph_first": "node/worker-02",
+    "graph_first_status": "SUPPORTED",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2026-01-02T04:55:13+00:00 <= first symptom 2026-01-02T04:55:18+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> checkoutservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "1 error lines: Error: Error from server (BadRequest): container \"server\" in pod \"productcatalogservice-6f"
+      }
+    ]
+  },
+  "C29": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2026-01-02T08:01:42+00:00",
+    "n_candidates": 4,
+    "proofops": {
+      "cls": "ServiceRoutingFault",
+      "obj": "app/productcatalogservice",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "TemporalPrecedence"
+      ],
+      "kind": "LogError",
+      "why": "calls to productcatalogservice fail although it has endpoints"
+    },
+    "proofops_top3": [
+      "app/productcatalogservice",
+      "app/currencyservice",
+      "app/checkoutservice"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> productcatalogservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "FailedCreate x2"
+      }
+    ]
+  },
+  "C30": {
+    "symptom_services": [
+      "checkoutservice",
+      "frontend",
+      "productcatalogservice",
+      "recommendationservice"
+    ],
+    "onset": "2025-12-25T08:32:01+00:00",
+    "n_candidates": 7,
+    "proofops": {
+      "cls": "PerformanceFault",
+      "obj": "node/worker-02",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "TemporalPrecedence"
+      ],
+      "kind": "MetricAnomaly",
+      "why": "tcp_retans anomaly on worker-02"
+    },
+    "proofops_top3": [
+      "node/worker-02",
+      "app/shippingservice",
+      "node/worker-01"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "DependencyPath",
+        "detail": "checkoutservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "30 error lines: failed to complete the order: rpc error: code = Internal desc = shipping quote failure: fa"
+      }
+    ]
+  },
+  "C31": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-21T10:39:56+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "RuntimeFault",
+      "obj": "app/paymentservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "WarningEvent",
+      "why": "container unhealthy or restarting (Unhealthy)"
+    },
+    "proofops_top3": [
+      "app/paymentservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-21T10:40:05+00:00 <= first symptom 2025-11-21T10:39:56+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> checkoutservice -> paymentservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "11 error lines: failed to complete the order: rpc error: code = Internal desc = failed to charge card: cou"
+      }
+    ]
+  },
+  "C32": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-21T10:58:14+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "RuntimeFault",
+      "obj": "app/currencyservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "WarningEvent",
+      "why": "container unhealthy or restarting (Unhealthy)"
+    },
+    "proofops_top3": [
+      "app/currencyservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-21T10:58:25+00:00 <= first symptom 2025-11-21T10:58:14+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> currencyservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "193 error lines: could not retrieve currencies: rpc error: code = Unavailable desc = connection error: desc"
+      }
+    ]
+  },
+  "C33": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-21T11:52:24+00:00",
+    "n_candidates": 3,
+    "proofops": {
+      "cls": "RuntimeFault",
+      "obj": "app/checkoutservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "WarningEvent",
+      "why": "container unhealthy or restarting (Unhealthy)"
+    },
+    "proofops_top3": [
+      "app/checkoutservice",
+      "app/checkoutservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-21T11:52:34+00:00 <= first symptom 2025-11-21T11:52:24+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> checkoutservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "6 error lines: failed to complete the order: rpc error: code = Unavailable desc = connection error: desc "
+      }
+    ]
+  },
+  "C34": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-14T07:41:01+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "SchedulingFault",
+      "obj": "app/emailservice",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "CorroboratingSignal"
+      ],
+      "kind": "WarningEvent",
+      "why": "no node can run the pod"
+    },
+    "proofops_top3": [
+      "app/emailservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-14T07:41:01+00:00 <= first symptom 2025-11-14T07:41:01+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> checkoutservice -> emailservice"
+      }
+    ]
+  },
+  "C35": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-10T18:26:48+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "SchedulingFault",
+      "obj": "app/redis-cart",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "CorroboratingSignal"
+      ],
+      "kind": "WarningEvent",
+      "why": "no node can run the pod"
+    },
+    "proofops_top3": [
+      "app/redis-cart",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-10T18:26:46+00:00 <= first symptom 2025-11-10T18:26:48+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> cartservice -> redis-cart"
+      }
+    ]
+  },
+  "C36": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-13T13:11:07+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "SchedulingFault",
+      "obj": "app/redis-cart",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "CorroboratingSignal"
+      ],
+      "kind": "WarningEvent",
+      "why": "no node can run the pod"
+    },
+    "proofops_top3": [
+      "app/redis-cart",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-13T13:11:05+00:00 <= first symptom 2025-11-13T13:11:07+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> cartservice -> redis-cart"
+      }
+    ]
+  },
+  "C37": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-17T11:19:56+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "SchedulingFault",
+      "obj": "app/productcatalogservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "WarningEvent",
+      "why": "no node can run the pod"
+    },
+    "proofops_top3": [
+      "app/productcatalogservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-17T11:19:54+00:00 <= first symptom 2025-11-17T11:19:56+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> productcatalogservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "77 error lines: could not retrieve products: rpc error: code = Unavailable desc = connection error: desc ="
+      }
+    ]
+  },
+  "C38": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-14T12:33:55+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "SchedulingFault",
+      "obj": "app/cartservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "WarningEvent",
+      "why": "no node can run the pod"
+    },
+    "proofops_top3": [
+      "app/cartservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-14T12:33:56+00:00 <= first symptom 2025-11-14T12:33:55+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> cartservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "180 error lines: could not retrieve cart: rpc error: code = Unavailable desc = connection error: desc = \"tr"
+      }
+    ]
+  },
+  "C39": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-14T05:20:50+00:00",
+    "n_candidates": 3,
+    "proofops": {
+      "cls": "SchedulingFault",
+      "obj": "app/frontend",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "WarningEvent",
+      "why": "no node can run the pod"
+    },
+    "proofops_top3": [
+      "app/frontend",
+      "app/productcatalogservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-14T05:20:48+00:00 <= first symptom 2025-11-14T05:20:50+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "11 error lines: could not retrieve product: rpc error: code = Unavailable desc = connection error: desc = "
+      }
+    ]
+  },
+  "C40": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-14T08:10:23+00:00",
+    "n_candidates": 3,
+    "proofops": {
+      "cls": "SchedulingFault",
+      "obj": "app/emailservice",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "CorroboratingSignal"
+      ],
+      "kind": "WarningEvent",
+      "why": "no node can run the pod"
+    },
+    "proofops_top3": [
+      "app/emailservice",
+      "app/productcatalogservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-14T08:10:21+00:00 <= first symptom 2025-11-14T08:10:23+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> checkoutservice -> emailservice"
+      }
+    ]
+  },
+  "C41": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-14T13:43:44+00:00",
+    "n_candidates": 3,
+    "proofops": {
+      "cls": "SchedulingFault",
+      "obj": "app/adservice",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "CorroboratingSignal"
+      ],
+      "kind": "WarningEvent",
+      "why": "no node can run the pod"
+    },
+    "proofops_top3": [
+      "app/adservice",
+      "app/productcatalogservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-14T13:43:45+00:00 <= first symptom 2025-11-14T13:43:44+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> adservice"
+      }
+    ]
+  },
+  "C42": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-14T14:21:35+00:00",
+    "n_candidates": 7,
+    "proofops": {
+      "cls": "SchedulingFault",
+      "obj": "app/checkoutservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "WarningEvent",
+      "why": "no node can run the pod"
+    },
+    "proofops_top3": [
+      "app/checkoutservice",
+      "node/worker-02",
+      "app/checkoutservice"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-14T14:21:35+00:00 <= first symptom 2025-11-14T14:21:35+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> checkoutservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "20 error lines: failed to complete the order: rpc error: code = Unavailable desc = connection error: desc "
+      }
+    ]
+  },
+  "C43": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-10T18:03:29+00:00",
+    "n_candidates": 3,
+    "proofops": {
+      "cls": "SchedulingFault",
+      "obj": "app/redis-cart",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "WarningEvent",
+      "why": "no node can run the pod"
+    },
+    "proofops_top3": [
+      "app/redis-cart",
+      "app/recommendationservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-10T18:03:27+00:00 <= first symptom 2025-11-10T18:03:29+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> cartservice -> redis-cart"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "1 error lines: 1:M 10 Nov 2025 18:03:44.607 * <bf> \t{ bf-error-rate       :      0.01 }"
+      }
+    ]
+  },
+  "C44": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-17T11:22:41+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "SchedulingFault",
+      "obj": "app/recommendationservice",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "CorroboratingSignal"
+      ],
+      "kind": "WarningEvent",
+      "why": "no node can run the pod"
+    },
+    "proofops_top3": [
+      "app/recommendationservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-17T11:22:39+00:00 <= first symptom 2025-11-17T11:22:41+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> recommendationservice"
+      }
+    ]
+  },
+  "C45": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-17T10:01:20+00:00",
+    "n_candidates": 3,
+    "proofops": {
+      "cls": "ServiceRoutingFault",
+      "obj": "app/productcatalogservice",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "TemporalPrecedence"
+      ],
+      "kind": "LogError",
+      "why": "calls to productcatalogservice fail although it has endpoints"
+    },
+    "proofops_top3": [
+      "app/productcatalogservice",
+      "app/adservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> productcatalogservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "FailedCreate x1"
+      }
+    ]
+  },
+  "C46": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-10T18:01:11+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "SchedulingFault",
+      "obj": "app/productcatalogservice",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "CorroboratingSignal"
+      ],
+      "kind": "WarningEvent",
+      "why": "no node can run the pod"
+    },
+    "proofops_top3": [
+      "app/productcatalogservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-10T18:01:10+00:00 <= first symptom 2025-11-10T18:01:11+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> productcatalogservice"
+      }
+    ]
+  },
+  "C47": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-14T12:31:20+00:00",
+    "n_candidates": 3,
+    "proofops": {
+      "cls": "SchedulingFault",
+      "obj": "app/adservice",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "CorroboratingSignal"
+      ],
+      "kind": "WarningEvent",
+      "why": "no node can run the pod"
+    },
+    "proofops_top3": [
+      "app/adservice",
+      "app/productcatalogservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-14T12:31:21+00:00 <= first symptom 2025-11-14T12:31:20+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> adservice"
+      }
+    ]
+  },
+  "C48": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-17T09:58:38+00:00",
+    "n_candidates": 3,
+    "proofops": {
+      "cls": "SchedulingFault",
+      "obj": "app/shippingservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "WarningEvent",
+      "why": "no node can run the pod"
+    },
+    "proofops_top3": [
+      "app/shippingservice",
+      "app/productcatalogservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-17T09:58:37+00:00 <= first symptom 2025-11-17T09:58:38+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> shippingservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "130 error lines: failed to get shipping quote: rpc error: code = Unavailable desc = connection error: desc "
+      }
+    ]
+  },
+  "C49": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-10T13:00:51+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "SchedulingFault",
+      "obj": "app/cartservice",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "CorroboratingSignal"
+      ],
+      "kind": "WarningEvent",
+      "why": "no node can run the pod"
+    },
+    "proofops_top3": [
+      "app/cartservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-10T13:00:52+00:00 <= first symptom 2025-11-10T13:00:51+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> cartservice"
+      }
+    ]
+  },
+  "C50": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-10T15:52:06+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "SchedulingFault",
+      "obj": "app/redis-cart",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "CorroboratingSignal"
+      ],
+      "kind": "WarningEvent",
+      "why": "no node can run the pod"
+    },
+    "proofops_top3": [
+      "app/redis-cart",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-10T15:52:04+00:00 <= first symptom 2025-11-10T15:52:06+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> cartservice -> redis-cart"
+      }
+    ]
+  },
+  "C51": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-17T10:38:57+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "SchedulingFault",
+      "obj": "app/currencyservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "WarningEvent",
+      "why": "no node can run the pod"
+    },
+    "proofops_top3": [
+      "app/currencyservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-17T10:38:56+00:00 <= first symptom 2025-11-17T10:38:57+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> currencyservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "147 error lines: could not retrieve currencies: rpc error: code = Unavailable desc = connection error: desc"
+      }
+    ]
+  },
+  "C52": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-11T15:31:46+00:00",
+    "n_candidates": 3,
+    "proofops": {
+      "cls": "ServiceRoutingFault",
+      "obj": "app/currencyservice",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "TemporalPrecedence"
+      ],
+      "kind": "LogError",
+      "why": "calls to currencyservice fail although it has endpoints"
+    },
+    "proofops_top3": [
+      "app/currencyservice",
+      "app/productcatalogservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> currencyservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "FailedCreate x1"
+      }
+    ]
+  },
+  "C53": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-11T09:02:21+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "ServiceRoutingFault",
+      "obj": "app/cartservice",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "TemporalPrecedence",
+        "CorroboratingSignal"
+      ],
+      "kind": "LogError",
+      "why": "calls to cartservice fail although it has endpoints"
+    },
+    "proofops_top3": [
+      "app/cartservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> cartservice"
+      }
+    ]
+  },
+  "C54": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-11T13:37:44+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "ServiceRoutingFault",
+      "obj": "app/checkoutservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "State",
+      "why": "service has no endpoints (selector application=checkoutservice)"
+    },
+    "proofops_top3": [
+      "app/checkoutservice",
+      "node/master"
+    ],
+    "graph_first": "app/checkoutservice",
+    "graph_first_status": "SUPPORTED",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-11T13:37:42+00:00 <= first symptom 2025-11-11T13:37:44+00:00 (+/-0 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> checkoutservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "102 error lines: failed to complete the order: rpc error: code = Unavailable desc = connection error: desc "
+      }
+    ]
+  },
+  "C55": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": null,
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "StartupFault",
+      "obj": "app/frontend",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "TemporalPrecedence"
+      ],
+      "kind": "WarningEvent",
+      "why": "container cannot start (Failed)"
+    },
+    "proofops_top3": [
+      "app/frontend",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "DependencyPath",
+        "detail": "frontend"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "1 error lines: Error: Error from server (BadRequest): container \"server\" in pod \"frontend-f86d57544-9gsst"
+      }
+    ]
+  },
+  "C56": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-10T17:28:56+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "StartupFault",
+      "obj": "app/checkoutservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "WarningEvent",
+      "why": "container cannot start (Failed)"
+    },
+    "proofops_top3": [
+      "app/checkoutservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-10T17:28:56+00:00 <= first symptom 2025-11-10T17:28:56+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> checkoutservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "1 error lines: Error: Error from server (BadRequest): container \"server\" in pod \"checkoutservice-6c445d9c"
+      }
+    ]
+  },
+  "C57": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-10T13:48:17+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "StartupFault",
+      "obj": "app/checkoutservice",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "TemporalPrecedence"
+      ],
+      "kind": "WarningEvent",
+      "why": "container cannot start (Failed)"
+    },
+    "proofops_top3": [
+      "app/checkoutservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> checkoutservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "1 error lines: Error: Error from server (BadRequest): container \"server\" in pod \"checkoutservice-7bbc84d4"
+      }
+    ]
+  },
+  "C58": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-11T02:40:49+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "StartupFault",
+      "obj": "app/recommendationservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "WarningEvent",
+      "why": "container cannot start (Failed)"
+    },
+    "proofops_top3": [
+      "app/recommendationservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-11T02:40:49+00:00 <= first symptom 2025-11-11T02:40:49+00:00 (+/-60 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> recommendationservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "1 error lines: Error: Error from server (BadRequest): container \"server\" in pod \"recommendationservice-65"
+      }
+    ]
+  },
+  "C59": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-10T19:13:00+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "StartupFault",
+      "obj": "app/checkoutservice",
+      "status": "SUPPORTED",
+      "missing": [],
+      "kind": "WarningEvent",
+      "why": "container cannot start (Failed)"
+    },
+    "proofops_top3": [
+      "app/checkoutservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "TemporalPrecedence",
+        "detail": "cause 2025-11-10T19:13:00+00:00 <= first symptom 2025-11-10T19:13:00+00:00 (+/-0 s)"
+      },
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> checkoutservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "1 error lines: Error: Error from server (BadRequest): container \"server\" in pod \"checkoutservice-5cf79c94"
+      }
+    ]
+  },
+  "C60": {
+    "symptom_services": [
+      "frontend"
+    ],
+    "onset": "2025-11-10T13:25:54+00:00",
+    "n_candidates": 2,
+    "proofops": {
+      "cls": "StartupFault",
+      "obj": "app/adservice",
+      "status": "PLAUSIBLE",
+      "missing": [
+        "TemporalPrecedence"
+      ],
+      "kind": "WarningEvent",
+      "why": "container cannot start (Failed)"
+    },
+    "proofops_top3": [
+      "app/adservice",
+      "node/master"
+    ],
+    "graph_first": "node/master",
+    "graph_first_status": "PLAUSIBLE",
+    "evidence": [
+      {
+        "type": "DependencyPath",
+        "detail": "frontend -> adservice"
+      },
+      {
+        "type": "CorroboratingSignal",
+        "detail": "1 error lines: Error: Error from server (BadRequest): container \"server\" in pod \"adservice-6c84558cdf-82z"
+      }
+    ]
+  }
+}

@@ -1,7 +1,14 @@
+huggingface_hub
 huggingface_hub==2.2.0
+neo4j
 neo4j==6.4.0
+networkx
+owlrl
 owlrl==7.6.2
 pandas==3.0.6
+pyshacl
 pyshacl==0.40.1
+python-dotenv
 python-dotenv==1.2.4
+rdflib
 rdflib==7.6.0

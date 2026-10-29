@@ -1,29 +1,31 @@
-# ProofOps evidence contracts (SHACL). Checked closed-world against ONE incident snapshot,
-# which is what lets us say evidence is MISSING rather than merely unknown.
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
 @prefix po:   <https://example.org/proofops#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
-# Base contract, declared on all diagnoses: three evidence types, each with provenance.
-po:DiagnosisContract a sh:NodeShape ;
-    sh:targetClass po:Diagnosis ;
-    sh:property [ sh:path po:hasEvidence ; sh:qualifiedValueShape [ sh:class po:TemporalPrecedence ] ;
-                  sh:qualifiedMinCount 1 ; sh:message "Missing evidence: TemporalPrecedence" ] ;
-    sh:property [ sh:path po:hasEvidence ; sh:qualifiedValueShape [ sh:class po:DependencyPath ] ;
-                  sh:qualifiedMinCount 1 ; sh:message "Missing evidence: DependencyPath" ] ;
-    sh:property [ sh:path po:hasEvidence ; sh:qualifiedValueShape [ sh:class po:CorroboratingSignal ] ;
-                  sh:qualifiedMinCount 1 ; sh:message "Missing evidence: CorroboratingSignal" ] .
+# Base contract on every diagnosis (inherited by all fault classes). Checked closed-world on ONE incident
+# snapshot, which is what lets us report evidence as MISSING rather than merely unknown.
+po:DiagnosisContract a sh:NodeShape ; sh:targetClass po:Diagnosis ;
+  sh:property [ sh:path po:hasEvidence ; sh:qualifiedValueShape [ sh:class po:TemporalPrecedence ] ; sh:qualifiedMinCount 1 ; sh:message "Missing evidence: TemporalPrecedence" ] ;
+  sh:property [ sh:path po:hasEvidence ; sh:qualifiedValueShape [ sh:class po:DependencyPath ] ; sh:qualifiedMinCount 1 ; sh:message "Missing evidence: DependencyPath" ] ;
+  sh:property [ sh:path po:hasEvidence ; sh:qualifiedValueShape [ sh:class po:CorroboratingSignal ] ; sh:qualifiedMinCount 1 ; sh:message "Missing evidence: CorroboratingSignal" ] .
 
-# Every evidence item must say where it came from.
-po:EvidenceProvenance a sh:NodeShape ;
-    sh:targetClass po:Evidence ;
-    sh:property [ sh:path prov:wasDerivedFrom ; sh:minCount 1 ; sh:message "Evidence without provenance" ] .
+po:EvidenceProvenance a sh:NodeShape ; sh:targetClass po:Evidence ;
+  sh:property [ sh:path prov:wasDerivedFrom ; sh:minCount 1 ; sh:message "Evidence without provenance" ] .
 
-# Fault-specific contract: for change-induced faults (inherited by ConfigurationFault and
-# ResourceLimitFault through rdfs:subClassOf), the corroborating signal must be of an allowed type.
-po:ChangeInducedContract a sh:NodeShape ;
-    sh:targetClass po:ChangeInducedFaultDiagnosis ;
-    sh:property [ sh:path ( po:hasEvidence po:signalType ) ;
-                  sh:in ( po:ConnectionFailure po:ConnectionPoolExhausted po:ConfigError
-                          po:OutOfMemory po:CrashLoop po:MemorySaturation ) ;
-                  sh:message "CorroboratingSignal type not allowed for a change-induced fault" ] .
+# Class-specific contracts: which signal kinds may corroborate a diagnosis of that class.
+po:AdmissionFaultContract a sh:NodeShape ; sh:targetClass po:AdmissionFaultDiagnosis ;
+  sh:property [ sh:path ( po:hasEvidence po:signalKind ) ; sh:in ( po:WarningEvent po:PodStatus po:LogError po:Alert ) ; sh:message "Corroborating signal kind not allowed for AdmissionFault" ] .
+po:SchedulingFaultContract a sh:NodeShape ; sh:targetClass po:SchedulingFaultDiagnosis ;
+  sh:property [ sh:path ( po:hasEvidence po:signalKind ) ; sh:in ( po:WarningEvent po:PodStatus po:LogError po:Alert ) ; sh:message "Corroborating signal kind not allowed for SchedulingFault" ] .
+po:StartupFaultContract a sh:NodeShape ; sh:targetClass po:StartupFaultDiagnosis ;
+  sh:property [ sh:path ( po:hasEvidence po:signalKind ) ; sh:in ( po:WarningEvent po:PodStatus po:LogError po:Alert ) ; sh:message "Corroborating signal kind not allowed for StartupFault" ] .
+po:RuntimeFaultContract a sh:NodeShape ; sh:targetClass po:RuntimeFaultDiagnosis ;
+  sh:property [ sh:path ( po:hasEvidence po:signalKind ) ; sh:in ( po:WarningEvent po:PodStatus po:LogError po:Alert po:MetricAnomaly ) ; sh:message "Corroborating signal kind not allowed for RuntimeFault" ] .
+po:ServiceRoutingFaultContract a sh:NodeShape ; sh:targetClass po:ServiceRoutingFaultDiagnosis ;
+  sh:property [ sh:path ( po:hasEvidence po:signalKind ) ; sh:in ( po:LogError po:Alert po:MetricAnomaly po:WarningEvent ) ; sh:message "Corroborating signal kind not allowed for ServiceRoutingFault" ] .
+po:PerformanceFaultContract a sh:NodeShape ; sh:targetClass po:PerformanceFaultDiagnosis ;
+  sh:property [ sh:path ( po:hasEvidence po:signalKind ) ; sh:in ( po:MetricAnomaly po:Alert po:LogError ) ; sh:message "Corroborating signal kind not allowed for PerformanceFault" ] .
+po:InfrastructureFaultContract a sh:NodeShape ; sh:targetClass po:InfrastructureFaultDiagnosis ;
+  sh:property [ sh:path ( po:hasEvidence po:signalKind ) ; sh:in ( po:WarningEvent po:PodStatus po:MetricAnomaly po:Alert po:LogError ) ; sh:message "Corroborating signal kind not allowed for InfrastructureFault" ] .
+po:CodeDefectContract a sh:NodeShape ; sh:targetClass po:CodeDefectDiagnosis ;
+  sh:property [ sh:path ( po:hasEvidence po:signalKind ) ; sh:in ( po:LogError po:Alert po:MetricAnomaly ) ; sh:message "Corroborating signal kind not allowed for CodeDefect" ] .
